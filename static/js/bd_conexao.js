@@ -8,7 +8,7 @@ import serviceAccount from `${process.env.SERVICE_ACCOUNT}`;
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: process.env.DATABASE_URL
+  databaseURL: process.env.DATABASE_LINK
 });
 
 const db = admin.database();
@@ -26,14 +26,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Criar
-async function criarNo(no = no == null ? "" : no,dados) {
-  const novaRef = ref(db, `/${no}`);
+async function criarNo(no,dados) {
+  const novaRef = ref(db, `${no}`);
   await set(novaRef, dados);
 }
 
 // Ler
-async function lerNo(no = no == null ? "" : no) {
-  const refDados = ref(db, `/${no}`);
+async function lerNo(no) {
+  const refDados = ref(db, `${no}`);
   const snapshot = await get(refDados);
   if (snapshot.exists()) {
     return snapshot.val();
@@ -43,14 +43,14 @@ async function lerNo(no = no == null ? "" : no) {
 }
 
 // Atualizar
-async function atualizarNo(no = no == null ? "" : no, dados) {
-  const refAtualizar = ref(db, `/${no}`);
+async function atualizarNo(no, dados) {
+  const refAtualizar = ref(db, `${no}`);
   await update(refAtualizar, dados);
 }
 
 // Deletar
-async function deletarNo(no = no == null ? "" : no) {
-  const refDeletar = ref(db, `/${no}`);
+async function deletarNo(no) {
+  const refDeletar = ref(db, `${no}`);
   await remove(refDeletar);
 }
 
