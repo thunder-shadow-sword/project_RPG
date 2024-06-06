@@ -1,8 +1,18 @@
 import uuid from "uuid";
 
+class person {
+  constructor(user, password, email, phone, name) {
+    id = uuid.v4(),
+    (this.username = user),
+    (this.name = name),
+    (this.password = password),
+    (this.email = email),
+    (this.phone = phone)
+  }
+}
+
 class Dados {
-  constructor(id, userName, avatar, locAvatar, idadeAvatar, tipeGender) {
-    (this.avatar = id),
+  constructor(userName, avatar, locAvatar, idadeAvatar, tipeGender) {
     (this.player = userName),
     (this.name = avatar),
     (this.origem = locAvatar),
@@ -55,9 +65,12 @@ class Others {
 }
 
 let personClass = new Object;
-personClass.dados =new Dados(uuid.v5(),null,undefined,undefined,undefined,undefined);
-personClass.other = new Others(1 ,600, 100, 0);
-personClass.atributos = new Atributes(0,0,0,0,0,0,0,0,0,0);
-personClass.classe = new Classe(undefined);
+let avatar = new Object;
+personClass.person = new person(null, null, null, null, null);
+avatar.dados =new Dados(uuid.v5(),null,undefined,undefined,undefined,undefined);
+avatar.other = new Others(1 ,600, 100, 0);
+avatar.atributos = new Atributes(0,0,0,0,0,0,0,0,0,0);
+avatar.classe = new Classe(undefined);
 
-export default personClass;
+
+export default {personClass, avatar};

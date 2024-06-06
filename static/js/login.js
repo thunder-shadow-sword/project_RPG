@@ -1,14 +1,14 @@
-import { v4 as uuidv4 } from 'uuid';
-import bancodeDados from "./bancodeDados.js";
-import personClass from "./class.js";
-//import classesObj from "./classes.js";
+import functionsBanco from "./bancodeDados.js";
+import { personClass } from "./class.js";
+import { avatar } from "./class.js";
 
-bancodeDados.app();
+functionsBanco.app();
+functionsBanco.db();
 
-const id = uuidv4();
-console.log(id);
+let personClass = new Object;
+let avatar = new Object
 
-const db = bancodeDados.lerNo("Users");
+const bancoDados = functionsBanco.lerNo("Users");
 
 const atributosTypes = [
   "tamanho",
@@ -23,8 +23,8 @@ const atributosTypes = [
   "percepcao",
 ];
 
-let avatar = () => personClass;
-avatar = avatar();
+console.table(personClass);
+console.table(avatar);
 
 const popup = document.querySelector("div.popup.active");
 const btn_criar = document.querySelector("#btn_criar");
@@ -45,3 +45,5 @@ btn_logar.addEventListener("click", () => {
   popup.toggleAttribute("hidden");
   return avatar;
 });
+
+export default {personClass, avatar, bancoDados};

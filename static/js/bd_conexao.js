@@ -4,7 +4,7 @@ import * as admin from 'firebase-admin';
 import dotenv from "dotenv";
 dotenv.config();
 
-import serviceAccount from `${process.env.SERVICE_ACCOUNT}`;
+const serviceAccount = process.env.SERVICE_ACCOUNT;
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -25,15 +25,14 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-// Criar
-async function criarNo(no,dados) {
-  const novaRef = ref(db, `${no}`);
+// Funções para interagir com o banco de dados
+async function criarNo(no, dados) {
+  const novaRef = ref(db, no);
   await set(novaRef, dados);
 }
 
-// Ler
 async function lerNo(no) {
-  const refDados = ref(db, `${no}`);
+  const refDados = ref(db, no);
   const snapshot = await get(refDados);
   if (snapshot.exists()) {
     return snapshot.val();
@@ -42,24 +41,23 @@ async function lerNo(no) {
   }
 }
 
-// Atualizar
 async function atualizarNo(no, dados) {
-  const refAtualizar = ref(db, `${no}`);
+  const refAtualizar = ref(db, no);
   await update(refAtualizar, dados);
 }
 
-// Deletar
 async function deletarNo(no) {
-  const refDeletar = ref(db, `${no}`);
+  const refDeletar = ref(db, no);
   await remove(refDeletar);
 }
 
-let bancodeDados = {
+const functionsBanco = {
   app,
   criarNo,
   lerNo,
   atualizarNo,
-  deletarNo
-}
+  deletarNo,
+  db
+};
 
-export default bancodeDados;
+export default functionsBanco;
