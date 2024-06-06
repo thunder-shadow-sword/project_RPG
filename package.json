@@ -1,0 +1,35 @@
+{
+  "name": "rpg_project",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "creation of rpg project",
+  "main": "./server/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon server/app.js"
+  },
+  "keywords": [
+    "rpg"
+  ],
+  "author": "Breno Santos",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "path": "^0.12.7",
+    "uuid": "^9.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thunder-shadow-sword/project_RPG.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thunder-shadow-sword/project_RPG/issues"
+  },
+  "homepage": "https://github.com/thunder-shadow-sword/project_RPG#readme"
+}

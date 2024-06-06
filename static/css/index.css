@@ -1,0 +1,111 @@
+@import url(../css/rootStyle.css);
+
+html > body {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    font-family: 'Jomhuria', serif;
+    font-size: 1.6em;
+    letter-spacing: 2px;
+}
+
+article {
+    display: flex;
+    width: 100%;
+    height: 100%;    
+}
+
+.scroller {
+    width: 10px;
+    height: 40px;
+    overflow-y: scroll;
+    scrollbar-width: 3px;
+}
+
+.grade {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: var(--backBlue);
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    position: fixed;
+    gap: 30px;
+}
+
+.col1 {
+    background: var(--backRoxo);
+    width: 42vw;
+    height: 100%;
+    margin-left: 100px;
+    color: var(--cYlw);
+    overflow-y: scroll !important;
+    position: relative !important;
+    padding-left: 20px;
+    border-radius: 50px;
+    padding: 17px;
+}
+
+.col2 {
+    background: var(--backRoxo);
+    width: 42vw;
+    height: 100%;
+    margin-right: 100px;
+    color: var(--cYlw);
+    overflow-y: scroll !important;
+    position: relative !important;
+    padding-left: 20px;
+    border-radius: 50px;
+    padding: 17px;
+}
+
+#dados {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+}
+
+#atributos {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+}
+
+.dadosAvatar {
+    display: grid;
+    grid-template-areas: "col1 col1 col1 col2 col2 col3 col3";
+    width: 100%;
+    gap: 2px;
+}
+
+.dadosAvatar>p {
+    width: 300px;
+}
+
+.dadosAvatar input, .dadosAvatar select {
+    display: grid;
+    width: 150px;
+    justify-self: center;
+    grid-area: col2;
+    MARGIN-BOTTOM: 0.2EM;
+    BORDER-BOTTOM: #0c1ba1 SOLID 3PX;
+    BORDER-RADIUS: 0PX 0PX 0.2EM 0.2EM;
+}
+
+.atributosAvatar {
+    display: grid;
+    grid-template-areas: "col1 col1 col1 col2 col2 col3 col3";
+    width: 100%;
+    gap: 2px;
+}
+
+.atributosAvatar > p {
+    display: flex;
+}
+
+.col2 details{
+    width: 100%;
+}

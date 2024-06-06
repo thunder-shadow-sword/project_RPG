@@ -1,0 +1,12 @@
+@import url(../css/rootStyle.css);
+
+html > body, form {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    font-family: 'Jomhuria', serif;
+    font-size: 1.6em;
+    letter-spacing: 2px;
+}
+
+form 
