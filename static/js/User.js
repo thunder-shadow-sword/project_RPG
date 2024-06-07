@@ -10,6 +10,8 @@ avatar.other = new Others(1, 600, 100, 0);
 avatar.atributos = new Atributes(0, 0, 0, 0, 0, 0, 0, 0, 0);
 avatar.classe = new Classe(undefined);
 
-let user = { id: uuidv4(), personClass, avatar };
+let user = { "id": uuidv4(), "pessoa": personClass.person, avatar };
 
-export default user;
+const getUser = () => user;
+
+export default getUser;

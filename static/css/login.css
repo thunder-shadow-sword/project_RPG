@@ -1,31 +1,57 @@
+/* login.css */
 @import url(../css/rootStyle.css);
-
-html > body, form {
-    width: 100vw;
-    height: auto;
-    display: flex;
-    font-family: 'Jomhuria', serif;
-    font-size: 1.6em;
-    letter-spacing: 2px;
-}
 
 form {
     display: flex;
-    width: 40vw;
-    height: 80vh;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
     flex-direction: column;
-    background: var(--backOrg);
+    width: 40vw;
+    padding: 25px;
+    background: var(--cGry);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
 }
 
 .linha {
     display: flex;
-    width: 75vw;
-    height: 44px;
-    row-gap: 20px;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.linha label {
+    margin-bottom: 5px;
+    font-weight: 400;
+    font-style: bold;
+    height: 30px;
+    color: var(--cOrg);
+}
+
+.linha input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 13px;
+    width: 100%;
+    height: 40px;
+    text-transform: uppercase;
+}
+
+center {
+    width: 100%;
+    height: auto;
+}
+
+button[type="button"] {
+    width: 120px;
+    height: 60px;
+    background: var(--cOrg);
+    color: var(--cGry);
+    font-family: 'Jomhuria', serif;
+    font-size: 40px;
+    font-weight: 200;
+    border-radius: 14px;
+}
+
+button:hover {
     background: var(--backBlue);
-    margin: 0 auto;
-    flex-direction: row;
+    color: var(--cWht);
 }
