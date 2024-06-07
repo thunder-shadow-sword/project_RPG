@@ -32,6 +32,9 @@ form {
     border-radius: 13px;
     width: 100%;
     height: 40px;
+}
+
+input#name {
     text-transform: uppercase;
 }
 

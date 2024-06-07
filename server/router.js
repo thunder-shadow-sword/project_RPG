@@ -6,16 +6,25 @@ import getUser from '../static/js/User.js';
 const router = express.Router();
 const __dirname = path.resolve();
 
-const reference = db.collection('Users').doc('User');
-
+const reference = db.collection('Users');
 const user = getUser();
-console.log(user);
+
+const getData = async () => {
+  const snapshot = await reference.get();
+  const users = [];
+    
+  snapshot.forEach(doc => {
+    users.push({ id: doc.id, ...doc.data() });
+  });
+  console.log(users.id, users.avatar, users.pessoa);
+}
+
+getData();
 // Configura middleware para servir arquivos estáticos da pasta 'public'
 router.use('/static', express.static(path.join(__dirname, 'static')));
 
 router.get('/', async (req, res) => {
   try {
-    const doc = await reference.get();
     res.status(200).redirect('login');
   } catch (err) { 
     console.error(err);
@@ -23,30 +32,43 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/login', async (req, res) => { // Obtenha o objeto user
-  res.render('login'); // Renderize a página EJS e passe o objeto user como uma variável
+router.get('/login', async (req, res) => {
+  try {
+    const params = req.query;
+    const isLogin = params.isLogin; // Convert to boolean
+    console.log(isLogin);
+    console.log(params);
+    if (isLogin) {
+      
+    } else {
+      // Atualiza os dados do usuário com os parâmetros recebidos
+      user.pessoa.username = params.username;
+      user.pessoa.name = params.name;
+      user.pessoa.password = params.password;
+      user.pessoa.email = params.mail;
+      user.pessoa.phone = params.phone;
+
+      // Converte objetos personalizados em objetos simples
+      const pessoaPlainObject = JSON.parse(JSON.stringify(user.pessoa));
+      const avatarPlainObject = JSON.parse(JSON.stringify(user.avatar));
+
+      // Adiciona um novo documento à coleção com o ID especificado
+      await reference.doc(user.id).set({
+        pessoa: pessoaPlainObject,
+        avatar: avatarPlainObject
+      });
+
+      // Responder com sucesso
+      res.redirect('/index');
+    }
+  } catch (error) {
+    console.error('Erro ao realizar login:', error);
+    res.sendStatus(500);
+  }
 });
 
-router.post('/login/:params', async (req, res) => {
-  try {
-      const params = req.params.params.split('&');
-      const user = getUser();
-
-      // Verifica se o usuário existe no banco de dados
-      const userRef = db.collection('Users').doc(user.user);
-      const doc = await userRef.get();
-
-      if (doc.exists && doc.data().password === user.password) {
-          // Se o usuário existe e a senha está correta, redirecione para o índice
-          res.redirect('/index');
-      } else {
-          // Se o usuário não existe ou a senha está incorreta, retorne uma mensagem de erro
-          res.status(400).send('Usuário ou senha incorretos');
-      }
-  } catch (error) {
-      console.error('Erro ao realizar login:', error);
-      res.sendStatus(500);
-  }
+router.get('/index', async (req, res) => {
+  res.status(200).render('index');
 });
 
 export default router; // Exporte o roteador e a função getUser

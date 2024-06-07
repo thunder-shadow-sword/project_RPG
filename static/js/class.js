@@ -52,8 +52,8 @@ class Others {
 }
 
 class Person {
-  constructor(user, password, email, phone, name) {
-    this.username = user;
+  constructor(username, password, email, phone, name) {
+    this.username = username;
     this.name = name;
     this.password = password;
     this.email = email;
