@@ -2,6 +2,9 @@ import dotenv from "dotenv";
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
+import { FieldValue } from 'firebase-admin/firestore';
+import { db } from './firebaseConexao.js';
+
 const router = express.Router();
 const __dirname = path.resolve();
 
@@ -17,19 +20,30 @@ router.use(express.json());
 // Configura o middleware para servir arquivos estáticos da pasta 'public'
 router.use('/static', express.static(path.join(__dirname, 'static')));
 
-router.get('/', (req, res) => {
-    res.redirect(`/login`);
+router.get('/', async (req, res) => {
+    const peopleRef = db.collection('Users').doc('user')
+    const doc = await peopleRef.get()
+    
+    if (!doc.exists) {
+        return res.sendStatus(400)
+    }
+    
+    res.status(200).send(doc.data()).redirect(`login`);
 });
 
+app.post('/login/:user:name:password:mail:phone:', (req, res) => {
+    const { user, name, password, mail, phone } = req.params
+    
+    res.status(200).render(`index`);
+})
+
 // Inicial Rote
-router.get('/login', (req, res) => {
-    res.status(200);
+router.get('/login', async (req, res) => {
     res.render(`login`);
 });
 
 router.post('/rpg-game', (req, res) => {
-    res.status(200);
-    res.render(`index`);
+    res.status(200).render(`index`);
 });
 
 export default router;
