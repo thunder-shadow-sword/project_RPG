@@ -72,5 +72,4 @@ avatar.other = new Others(1 ,600, 100, 0);
 avatar.atributos = new Atributes(0,0,0,0,0,0,0,0,0,0);
 avatar.classe = new Classe(undefined);
 
-
-export default {personClass, avatar};
+module.exports = {personClass, avatar}

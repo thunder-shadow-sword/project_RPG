@@ -46,4 +46,4 @@ btn_logar.addEventListener("click", () => {
   return avatar;
 });
 
-export default {personClass, avatar, bancoDados};
+module.exports = {personClass, avatar, bancoDados}

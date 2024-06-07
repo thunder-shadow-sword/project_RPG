@@ -46,4 +46,4 @@ router.post('/rpg-game', (req, res) => {
     res.status(200).render(`index`);
 });
 
-export default router;
+module.exports = { router }
