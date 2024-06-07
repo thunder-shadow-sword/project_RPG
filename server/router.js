@@ -1,49 +1,46 @@
-import dotenv from "dotenv";
 import express from 'express';
 import path from 'path';
-import bodyParser from 'body-parser';
-import { FieldValue } from 'firebase-admin/firestore';
 import { db } from './firebaseConexao.js';
+import user from '../static/js/User.js';
 
 const router = express.Router();
 const __dirname = path.resolve();
 
-// Carrega as variáveis de ambiente do arquivo .env
-dotenv.config();
-
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json());
-
-// Configura o middleware para analisar o corpo das requisições
-router.use(express.json());
-
-// Configura o middleware para servir arquivos estáticos da pasta 'public'
+// Configura middleware para servir arquivos estáticos da pasta 'public'
 router.use('/static', express.static(path.join(__dirname, 'static')));
 
 router.get('/', async (req, res) => {
-    const peopleRef = db.collection('Users').doc('user')
-    const doc = await peopleRef.get()
-    
+  try {
+    const peopleRef = db.collection('Users').doc('User');
+    const doc = await peopleRef.get();
+
     if (!doc.exists) {
-        return res.sendStatus(400)
+      res.sendStatus(400);
+    } else {
+      console.log(doc.data());
+      res.status(200).render('login');
     }
-    
-    res.status(200).send(doc.data()).redirect(`login`);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
 });
 
-app.post('/login/:user:name:password:mail:phone:', (req, res) => {
-    const { user, name, password, mail, phone } = req.params
-    
-    res.status(200).render(`index`);
-})
+router.post('/login', (req, res) => {
+  const { user, name, password, email, phone } = req.body;
 
-// Inicial Rote
+  // Aqui você pode adicionar lógica para autenticar o usuário usando os dados fornecidos
+
+  res.status(200).redirect('index');
+});
+
 router.get('/login', async (req, res) => {
-    res.render(`login`);
+  console.table(user);
+  res.render('login');
 });
 
 router.post('/rpg-game', (req, res) => {
-    res.status(200).render(`index`);
+  res.status(200).render('index');
 });
 
-module.exports = { router }
+export default router;

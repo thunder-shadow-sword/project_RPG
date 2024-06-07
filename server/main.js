@@ -1,8 +1,10 @@
-// Carrega as variáveis de ambiente do arquivo .env
 import dotenv from "dotenv";
 import express from 'express';
 import path from 'path';
 import router from "./router.js";
+
+dotenv.config();
+
 const app = express();
 const __dirname = path.resolve();
 
@@ -10,8 +12,13 @@ const __dirname = path.resolve();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use(router);
+// Configura middleware para servir arquivos estáticos
+app.use('/static', express.static(path.join(__dirname, 'static')));
 
-dotenv.config();
+// Configura middleware para analisar o corpo das requisições
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(router);
 
 export default app;

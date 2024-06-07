@@ -9,4 +9,23 @@ html > body, form {
     letter-spacing: 2px;
 }
 
-form {}
+form {
+    display: flex;
+    width: 40vw;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    flex-direction: column;
+    background: var(--backOrg);
+}
+
+.linha {
+    display: flex;
+    width: 75vw;
+    height: 44px;
+    row-gap: 20px;
+    background: var(--backBlue);
+    margin: 0 auto;
+    flex-direction: row;
+}
