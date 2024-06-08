@@ -1,0 +1,6 @@
+@import url(./rootStyle.css);
+
+h1 {
+    border: none;
+    border-bottom: 2px solid #fff;
+}

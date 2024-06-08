@@ -1,29 +1,33 @@
+// imports necessários
 import express from 'express';
 import path from 'path';
 import { db } from './firebaseConexao.js';
 import getUser from '../static/js/User.js';
 
+// Configura rotas e locations
 const router = express.Router();
 const __dirname = path.resolve();
 
-const reference = db.collection('Users');
+// dados de usuários do banco de dados
+const getUsers = db.collection('Users');
 let user = getUser();
 
 // Função para obter os usuários
 const getData = async () => {
-  const snapshot = await reference.get();
+  const reference = await getUsers.get();
   const users = [];
     
-  snapshot.forEach(doc => {
+  reference.forEach(doc => {
     users.push({ id: doc.id, ...doc.data() });
   });
-
   return users;
-}
+};
 
 // Configura middleware para servir arquivos estáticos da pasta 'public'
 router.use('/static', express.static(path.join(__dirname, 'static')));
 
+// Apartir daqui, são configurações de rotas Usando metodos HTTP
+// redirecionamento do / to login
 router.get('/', async (req, res) => {
   try {
     res.status(200).redirect('login');
@@ -98,6 +102,11 @@ router.post('/login', async (req, res) => {
 
 router.get('/index', async (req, res) => {
   res.status(200).render('index');
+});
+
+// Rota de captura global para rotas não existentes
+router.use((req, res) => {
+  res.status(404).render('error');
 });
 
 export default router; // Exporte o roteador e a função getUser

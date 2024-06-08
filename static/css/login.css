@@ -1,5 +1,4 @@
-/* login.css */
-@import url(../css/rootStyle.css);
+@import url(./rootStyle.css);
 
 form {
     display: flex;
