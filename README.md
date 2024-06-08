@@ -15,4 +15,5 @@ Porém um modelo, de estilo: Tabuleiro. Com uma pegada do modelo sendo um livro,
 
 Obs: estão ocultos arquivos importantes tais como: ".env" e "DatabaseKey.json". <br>Então é certeza que se você baixar este projeto, ele não irá funcionar.
 
-#### Criação Breno S. Santos, Jogo base e Ideia: Gabriel Gabúnua
+#### Jogo base/Ideia: Gabriel Gabúnua
+#### Criação: Breno S. Santos
