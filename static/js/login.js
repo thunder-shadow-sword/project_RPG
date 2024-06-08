@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         password: form.elements.password.value,
         mail: form.elements.mail.value,
         phone: form.elements.phone.value,
-        name: form.elements.name.value
+        name: form.elements.name.value.toUpperCase()
       };
       sendFormData(params);
     });
@@ -31,15 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(params)
-      })
-      .then(response => {
+      }).then(response => {
         if (!response.ok) {
           throw new Error('Erro ao enviar dados');
         }
         // Se o envio for bem-sucedido, redireciona para a página de índice
         window.location.href = '/index';
-      })
-      .catch(error => {
+      }).catch(error => {
         console.error('Erro ao enviar dados:', error);
       });
     }
