@@ -9,6 +9,7 @@ const __dirname = path.resolve();
 const reference = db.collection('Users');
 const user = getUser();
 
+// Função para obter os usuários
 const getData = async () => {
   const snapshot = await reference.get();
   const users = [];
@@ -16,10 +17,10 @@ const getData = async () => {
   snapshot.forEach(doc => {
     users.push({ id: doc.id, ...doc.data() });
   });
-  console.log(users.id, users.avatar, users.pessoa);
+
+  return users;
 }
 
-getData();
 // Configura middleware para servir arquivos estáticos da pasta 'public'
 router.use('/static', express.static(path.join(__dirname, 'static')));
 
@@ -34,12 +35,35 @@ router.get('/', async (req, res) => {
 
 router.get('/login', async (req, res) => {
   try {
-    const params = req.query;
-    const isLogin = params.isLogin; // Convert to boolean
-    console.log(isLogin);
-    console.log(params);
+    res.status(200).render('login');
+  } catch (err) { 
+    console.error(err);
+    res.status(500).send('Erro interno');
+  }
+});
+
+router.post('/login', async (req, res) => {
+  try {
+    const params = req.body;
+    const isLogin = (params.isLogin) === "true"; // Convert to boolean
+
+    // Obtém os usuários
+    const users = await getData();
+
     if (isLogin) {
-      
+      let isValidUser = false;
+
+      for (const user of users) {
+        if (user.pessoa.username === params.username && user.pessoa.password === params.password) {
+          isValidUser = true;
+          break; // Se encontrou um usuário válido, não é necessário continuar verificando os outros
+        }
+      }
+      if (isValidUser) {
+        res.redirect('/index');
+      } else {
+        res.status(401).send('Usuário ou senha inválidos');
+      }
     } else {
       // Atualiza os dados do usuário com os parâmetros recebidos
       user.pessoa.username = params.username;
