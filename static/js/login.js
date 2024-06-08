@@ -5,30 +5,42 @@ document.addEventListener('DOMContentLoaded', () => {
   
     criarBtn.addEventListener('click', () => {
       const params = {
-        isLogin: false,
+        isLogin: false.toString(),  // Converte booleano para string
         username: form.elements.username.value,
         password: form.elements.password.value,
         mail: form.elements.mail.value,
         phone: form.elements.phone.value,
         name: form.elements.name.value
       };
-      redirectToLogin(params);
+      sendFormData(params);
     });
   
     logarBtn.addEventListener('click', () => {
       const params = {
-        isLogin: true,
+        isLogin: true.toString(),  // Converte booleano para string
         username: form.elements.username.value,
         password: form.elements.password.value
       };
-      redirectToLogin(params);
+      sendFormData(params);
     });
   
-    function redirectToLogin(params) {
-      const queryString = Object.keys(params)
-        .map(key => `${key}=${encodeURIComponent(params[key])}`)
-        .join('&');
-      window.location.href = `/login?${queryString}`;
+    function sendFormData(params) {
+      fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(params)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erro ao enviar dados');
+        }
+        // Se o envio for bem-sucedido, redireciona para a página de índice
+        window.location.href = '/index';
+      })
+      .catch(error => {
+        console.error('Erro ao enviar dados:', error);
+      });
     }
-  });
-  
+});
