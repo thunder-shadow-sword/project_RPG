@@ -58,7 +58,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/index', async (req, res) => {
-    console.log("Usuário logado!")
+    console.log("Usuário logado!");
     res.status(200).render('index', { user: getDataUser });
 });
 
