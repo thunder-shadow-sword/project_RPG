@@ -7,7 +7,7 @@ const router = express.Router();
 const __dirname = path.resolve();
 
 const reference = db.collection('Users');
-const user = getUser();
+let user = getUser();
 
 // Função para obter os usuários
 const getData = async () => {
@@ -51,19 +51,22 @@ router.post('/login', async (req, res) => {
     const users = await getData();
 
     if (isLogin) {
-      let isValidUser = false;
-
+      let count = 0;
       for (const user of users) {
-        if (user.pessoa.username === params.username && user.pessoa.password === params.password) {
-          isValidUser = true;
-          break; // Se encontrou um usuário válido, não é necessário continuar verificando os outros
+        if (user.pessoa.password === params.password && user.pessoa.username === params.username ? true : false) {
+          count++;
+          if (count > 1) {
+          } else {
+            user = user;
+            console.table(user);
+            res.redirect('/index');
+            break;
+          }
         }
       }
-      if (isValidUser) {
-        res.redirect('/index');
-      } else {
-        res.status(401).send('Usuário ou senha inválidos');
-      }
+
+      console.error('Erro ao realizar login:', error);
+      res.sendStatus(500);
     } else {
       // Atualiza os dados do usuário com os parâmetros recebidos
       user.pessoa.username = params.username;
@@ -71,7 +74,7 @@ router.post('/login', async (req, res) => {
       user.pessoa.password = params.password;
       user.pessoa.email = params.mail;
       user.pessoa.phone = params.phone;
-
+      user.avatar.
       // Converte objetos personalizados em objetos simples
       const pessoaPlainObject = JSON.parse(JSON.stringify(user.pessoa));
       const avatarPlainObject = JSON.parse(JSON.stringify(user.avatar));
