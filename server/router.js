@@ -60,12 +60,11 @@ router.post('/login', async (req, res) => {
           } else {
             user = user;
             console.table(user);
-            res.redirect('/index');
+            res.status(200).redirect('/index');
             break;
           }
         }
       }
-
       console.error('Erro ao realizar login:', error);
       res.sendStatus(500);
     } else {
@@ -87,8 +86,9 @@ router.post('/login', async (req, res) => {
         avatar: avatarPlainObject
       });
 
+      console.log("novo usuário adicionado com sucesso!");
       // Responder com sucesso
-      res.redirect('/index');
+      res.status(200).redirect('/index');
     }
   } catch (error) {
     console.error('Erro ao realizar login:', error);
