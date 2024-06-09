@@ -4,7 +4,7 @@ Uma ideia de projeto que está em desenvolvimento, sobre um rpg. Ou o que pode s
 Porém um modelo, de estilo: Tabuleiro. Com uma pegada do modelo sendo um livro, e dentro detalhando as aventuras, bases, níveis, habilidades, classes entre outras coisas.
 <br>
  
-##### <strong>Progresso: 40%</strong><br>[#######---------------------]
+##### <strong>Progresso: 50%</strong><br>[##########-----------------]
 
 - [x] Formulários
 - [x] Criação de Objetos(USER) e Classes(para o USER)
