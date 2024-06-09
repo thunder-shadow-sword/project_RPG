@@ -6,7 +6,7 @@
   "main": "./server/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon server/app.js"
+    "start": "npx nodemon --no-deprecated server/server.js"
   },
   "keywords": [
     "rpg"
