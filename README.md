@@ -3,12 +3,14 @@ Uma ideia de projeto que está em desenvolvimento, sobre um rpg. Ou o que pode s
 <br>
 Porém um modelo, de estilo: Tabuleiro. Com uma pegada do modelo sendo um livro, e dentro detalhando as aventuras, bases, níveis, habilidades, classes entre outras coisas.
 <br>
-## Progresso: 40% <br> [############-------------]
+ 
+##### <strong>Progresso: 40%</strong><br>[#######---------------------]
 
 - [x] Formulários
 - [x] Criação de Objetos(USER) e Classes(para o USER)
 - [x] Algumas Rotas do Servidor
-- [ ] Comunicação com o Banco de daos
+- [x] Comunicação com o Banco de dados
+- [ ] Criação da página index, complexa
 - [ ] Construção do Back-end
 - [ ] Construção das funções de game
 - [ ] Uploud da Aplicação
